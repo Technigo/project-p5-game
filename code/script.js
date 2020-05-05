@@ -1,6 +1,7 @@
 // All the DOM selectors stored as short variables
 const board = document.getElementById('board')
 const questions = document.getElementById('questions')
+const restartButton = document.getElementById('restart')
 
 // Array with all the characters, as objects
 const CHARACTERS = [
@@ -251,7 +252,7 @@ const setSecret = () => {
 // This function to start (and restart) the game
 const start = () => {
   // Here we're setting charactersInPlay array to be all the characters to start with
-  charactersInPlay = CHARACTERS 
+  charactersInPlay = CHARACTERS
   // What else should happen when we start the game?
 }
 
@@ -264,14 +265,16 @@ const selectQuestion = () => {
   if (category === 'hair color') {
     currentQuestion = {
       attribute: 'hairColor',
-      value: , // add the value from the input here
+      // value: ,
+      // 👆 add the value from the input here
       category: category,
     }
   } else if (category === 'eye color') {
     // Set this up your self
   } else if (category === 'accessories') {
     currentQuestion = {
-      attribute: , // this is the property of the booleans such as smoke, glasses and hat. add the value from the input here
+      //attribute: ,
+      // 👆 this is the property of the booleans such as smoke, glasses and hat. add the value from the input here
       value: true, // we're asking if this person wears a hat for exaple, so always true in the question.
       category: category,
     }
@@ -280,27 +283,28 @@ const selectQuestion = () => {
   }
 }
 
-
 // This function should be invoked when you click on 'Find Out'.
 const checkQuestion = () => {
   // Compare the currentQuestion with the secret person.
-  // See if we should keep or remove poepl based on that
+  // See if we should keep or remove people based on that
   // Then invoke filterCharacters
 }
 
-
 // It'll filter the characters array and redraw the game board.
 const filterCharacters = (keep) => {
-
   // Show the correct alert message for different categories
   if (group === 'accessories') {
     if (keep) {
-      alert(`Yes, the person wears ${attribute}! Keep all that wears ${attribute}`)
+      alert(
+        `Yes, the person wears ${attribute}! Keep all that wears ${attribute}`
+      )
     } else {
-      alert(`No, the person doesn't wear ${attribute}! Remove all that wears ${attribute}`)
+      alert(
+        `No, the person doesn't wear ${attribute}! Remove all that wears ${attribute}`
+      )
     }
   } else if (group === 'other') {
-      // Similar to the one above
+    // Similar to the one above
   } else {
     if (keep) {
       // alert popup that says something like: "Yes, the person has yellow hair! Keep all persons with yellow hair"
