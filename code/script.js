@@ -350,9 +350,9 @@ const filterCharacters = (keep) => {
     }
   } else {
     if (keep) {
-      alert(`Yes, the person has a ${attribute}. Keeping all the people with ${attribute}.`)
+      alert(`Yes, the person is a ${attribute}. Keeping all the people that are ${attribute}s.`)
     } else {
-      alert(`No, the person doesn't have ${attribute}. Removing people with ${attribute}.`)
+      alert(`No, the person is not a ${attribute}. Removing ll the people that are ${attribute}s.`)
     } 
   }
 
