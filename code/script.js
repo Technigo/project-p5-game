@@ -3,7 +3,7 @@ const board = document.getElementById('board')
 const questions = document.getElementById('questions')
 const restartButton = document.getElementById('restart')
 const filterButton = document.getElementById('filter')
-const winOrLoseText = document.getElementById('WinOrLOseText')
+const winOrLoseText = document.getElementById('winOrLoseText')
 const winOrLose = document.getElementById('winOrLose')
 const playAgainButton = document.getElementById('playAgain')
 
@@ -258,8 +258,11 @@ const start = () => {
   // Here we're setting charactersInPlay array to be all the characters to start with
   charactersInPlay = CHARACTERS
 
-  board.style.display = 'flex'
-  winOrLose.style.display = 'none'
+  //On restart - show the board again
+  board.style.display = "flex"
+  //And hide the winOrLose section
+  winOrLose.style.display = "none"
+
   // What else should happen when we start the game?
   setSecret()
   generateBoard()
@@ -272,7 +275,6 @@ const selectQuestion = () => {
   // We also need a variable that stores the actual value of the question we've selected.
 
   const value = questions.value
-  console.log(value) 
   if (category === 'hair color') {
     currentQuestion = {
       attribute: 'hairColor',
@@ -297,10 +299,10 @@ const selectQuestion = () => {
   } else if (category === 'other') {
     // Set this up your self (should be same structure as above)
     currentQuestion = {
-      attribute: ('a smoking habit', 'a selfie habit'),
+      attribute: value,
       value: true,
       category: category,
-    }
+   }
   }
 }
 
@@ -380,18 +382,17 @@ const guess = (suspect) => {
 
 // If you confirm, this function is invoked
 const checkMyGuess = (suspect) => {
-  if (suspect === secret.name) {
-    winOrLoseText.innerHTML =`You guessed on ${suspect} and it was correct!`
-  } else {
-    winOrLoseText (`No it's not ${suspect}. Try again!`)
-  }
-  winOrLose.style.display = "flex"
-  board.style.display = "none"
-
   // 1. Check if the suspect is the same as the secret person's name
+  if (suspect === secret.name) {
   // 2. Set a Message to show in the win or lose section accordingly
+    winOrLoseText.innerHTML = `You guessed on ${suspect} and it was correct!`
+  } else {
+    winOrLoseText.innerHTML = `No it's not ${suspect}. It was ${secret.name}!`
+  }
   // 3. Show the win or lose section
-  // 4. Hide the game board
+  winOrLose.style.display = 'flex'
+   // 4. Hide the game board
+  board.style.display = 'none'
 }
 
 // Invokes the start function when website is loaded
