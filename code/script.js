@@ -1,343 +1,121 @@
 // All the DOM selectors stored as short variables
-const board = document.getElementById('board')
-const questions = document.getElementById('questions')
-const restartButton = document.getElementById('restart')
+const chat = document.getElementById("chat")
+const nameForm = document.getElementById("name-form")
+const inputwrapper = document.getElementById("input-wrapper")
 
-// Array with all the characters, as objects
-const CHARACTERS = [
-  {
-    name: 'Jabala',
-    img: 'images/jabala.svg',
-    hairColor: 'hidden',
-    eyeColor: 'hidden',
-    glasses: true,
-    hat: true,
-    smoker: false,
-  },
-  {
-    name: 'Jack',
-    img: 'images/jack.svg',
-    hairColor: 'hidden',
-    eyeColor: 'blue',
-    glasses: false,
-    hat: true,
-    smoker: false,
-  },
-  {
-    name: 'Jacques',
-    img: 'images/jacques.svg',
-    hairColor: 'grey',
-    eyeColor: 'blue',
-    glasses: false,
-    hat: true,
-    smoker: true,
-  },
-  {
-    name: 'Jai',
-    img: 'images/jai.svg',
-    hairColor: 'black',
-    eyeColor: 'brown',
-    glasses: false,
-    hat: false,
-    smoker: false,
-  },
-  {
-    name: 'Jake',
-    img: 'images/jake.svg',
-    hairColor: 'yellow',
-    eyeColor: 'green',
-    glasses: true,
-    hat: false,
-    smoker: false,
-  },
-  {
-    name: 'James',
-    img: 'images/james.svg',
-    hairColor: 'brown',
-    eyeColor: 'green',
-    glasses: true,
-    hat: false,
-    smoker: false,
-  },
-  {
-    name: 'Jana',
-    img: 'images/jana.svg',
-    hairColor: 'black',
-    eyeColor: 'hidden',
-    glasses: true,
-    hat: false,
-    smoker: false,
-  },
-  {
-    name: 'Jane',
-    img: 'images/jane.svg',
-    hairColor: 'yellow',
-    eyeColor: 'hidden',
-    glasses: true,
-    hat: false,
-    smoker: false,
-  },
-  {
-    name: 'Jaqueline',
-    img: 'images/jaqueline.svg',
-    hairColor: 'orange',
-    eyeColor: 'green',
-    glasses: true,
-    hat: false,
-    smoker: false,
-  },
+// Global variables, if you need any, declared here
 
-  {
-    name: 'Jazebelle',
-    img: 'images/jazebelle.svg',
-    hairColor: 'purple',
-    eyeColor: 'hidden',
-    glasses: true,
-    hat: false,
-    smoker: true,
-  },
-  {
-    name: 'Jean',
-    img: 'images/jean.svg',
-    hairColor: 'brown',
-    eyeColor: 'blue',
-    glasses: true,
-    hat: true,
-    smoker: true,
-  },
-  {
-    name: 'Jeane',
-    img: 'images/jeane.svg',
-    hairColor: 'brown',
-    eyeColor: 'green',
-    glasses: true,
-    hat: false,
-    smoker: false,
-  },
-  {
-    name: 'Jed',
-    img: 'images/jed.svg',
-    hairColor: 'orange',
-    eyeColor: 'green',
-    glasses: true,
-    hat: true,
-    smoker: true,
-  },
-  {
-    name: 'Jenni',
-    img: 'images/jenni.svg',
-    hairColor: 'white',
-    eyeColor: 'hidden',
-    glasses: false,
-    hat: true,
-    smoker: false,
-  },
-  {
-    name: 'Jeri',
-    img: 'images/jeri.svg',
-    hairColor: 'orange',
-    eyeColor: 'green',
-    glasses: true,
-    hat: false,
-    smoker: false,
-  },
-  {
-    name: 'Jerry',
-    img: 'images/jerry.svg',
-    hairColor: 'hidden',
-    eyeColor: 'blue',
-    glasses: false,
-    hat: true,
-    smoker: false,
-  },
-  {
-    name: 'Jess',
-    img: 'images/jess.svg',
-    hairColor: 'black',
-    eyeColor: 'blue',
-    glasses: true,
-    hat: false,
-    smoker: false,
-  },
-  {
-    name: 'Jocelyn',
-    img: 'images/jocelyn.svg',
-    hairColor: 'black',
-    eyeColor: 'brown',
-    glasses: true,
-    hat: false,
-    smoker: false,
-  },
-  {
-    name: 'Jon',
-    img: 'images/jon.svg',
-    hairColor: 'brown',
-    eyeColor: 'green',
-    glasses: true,
-    hat: false,
-    smoker: false,
-  },
-  {
-    name: 'Jordan',
-    img: 'images/jordan.svg',
-    hairColor: 'yellow',
-    eyeColor: 'hidden',
-    glasses: true,
-    hat: true,
-    smoker: false,
-  },
-  {
-    name: 'Josephine',
-    img: 'images/josephine.svg',
-    hairColor: 'grey',
-    eyeColor: 'brown',
-    glasses: false,
-    hat: false,
-    smoker: false,
-  },
-  {
-    name: 'Josh',
-    img: 'images/josh.svg',
-    hairColor: 'yellow',
-    eyeColor: 'green',
-    glasses: false,
-    hat: false,
-    smoker: false,
-  },
-  {
-    name: 'Jude',
-    img: 'images/jude.svg',
-    hairColor: 'black',
-    eyeColor: 'green',
-    glasses: false,
-    hat: false,
-    smoker: false,
-  },
-  {
-    name: 'Julie',
-    img: 'images/julie.svg',
-    hairColor: 'black',
-    eyeColor: 'brown',
-    glasses: true,
-    hat: true,
-    smoker: false,
-  },
-]
+// Functions declared here
 
-// Global variables
-let secret, currentQuestion, charactersInPlay
+const nameInput = document.getElementById("name-input")
 
-// Draw the game board
-const generateBoard = () => {
-  board.innerHTML = ''
-  charactersInPlay.forEach((person) => {
-    board.innerHTML += `
-      <div class="card">
-        <p>${person.name}</p>
-        <img src=${person.img} alt=${person.name}>
-        <div class="guess">
-          <span>Guess on ${person.name}?</span>
-          <button class="filled-button small" onclick="guess('${person.name}')">Guess</button>
+const handleNameInput = (event) => {
+  event.preventDefault()
+
+  showMessage(nameInput.value, "user")
+
+  nameInput.value = ""
+
+  setTimeout(()=> question1(), 1000)
+
+  
+
+  }
+
+  const question1 = () => {
+    showMessage("Hur ofta vill du spara?", "bot")
+    inputwrapper.innerHTML = `
+    <button id="button1">Lite varje månad</button>
+    <button id="button2">Ett engångsbelopp</button>`
+    document.getElementById("button1")
+    .addEventListener("click", () => question2())
+    document.getElementById("button2")
+    .addEventListener("click", () => answer1())
+
+  }
+
+  const question2 = () => {
+    showMessage("Strålande! Att spara lite varje månad gör att du sprider riskerna. Hur mycket vill du spara i månaden?", "bot")
+    inputwrapper.innerHTML = `
+    <button id="button3">Över 500 kr</button>
+    <button id="button4">Under 500 kr</button>`
+    document.getElementById("button3")
+    .addEventListener("click", () => question3())
+    document.getElementById("button4")
+    .addEventListener("click", () => answer1())
+  }
+
+  const question3 = () => {
+    showMessage("Så den sista och kanske viktigaste frågan! Vad brinner du mest för?", "bot")
+    inputwrapper.innerHTML = `
+    <button id="button5">Miljö & klimat</button>
+    <button id="button6">Sociala frågor</button>
+    <button id="button7">Jämställdhet</button>`
+    document.getElementById("button5")
+    .addEventListener("click", () => answer2())
+    document.getElementById("button6")
+    .addEventListener("click", () => answer2())
+    document.getElementById("button7")
+    .addEventListener("click", () => answer3())
+  }
+
+  const answer1 = () => {
+    showMessage("Hållbara aktier kanske passar dig!", "bot")
+    inputwrapper.innerHTML = `
+    <button onclick="window.location.href=('https://www.aktieinvest.se/hallbart-sparande/hallbara-aktier')">Läs mer om hållbara aktier!</button>`
+  }
+
+  const answer2 = () => {
+    showMessage("Hållbarhetsboxen kanske passar dig!", "bot")
+    inputwrapper.innerHTML = `
+    <button onclick="window.location.href=('https://www.aktieinvest.se/hallbarhetsboxen')">Läs mer om hållbarhetsboxen!</button>`
+  }
+
+  const answer3 = () => {
+    showMessage("Framtidsfeministens sparbox kanske passar dig!", "bot")
+    inputwrapper.innerHTML = `
+    <button onclick="window.location.href=('https://www.aktieinvest.se/framtidsfeministen')">Läs mer om Framtidsfeministens sparbox!</button>`
+  }
+
+// This function will add a chat bubble in the correct place based on who the sender is
+function showMessage(message, sender) {
+  if (sender === "user") {
+    chat.innerHTML += `
+      <section class="user-msg">
+        <div class="bubble user-bubble">
+          <p>${message}</p>
         </div>
-      </div>
+        <img src="assets/user.png" alt="User" />  
+      </section>
     `
-  })
-}
-
-// Randomly select a person from the characters array and set as the value of the variable called secret
-const setSecret = () => {
-  secret = charactersInPlay[Math.floor(Math.random() * charactersInPlay.length)]
-}
-
-// This function to start (and restart) the game
-const start = () => {
-  // Here we're setting charactersInPlay array to be all the characters to start with
-  charactersInPlay = CHARACTERS
-  // What else should happen when we start the game?
-}
-
-// setting the currentQuestion object when you select something in the dropdown
-const selectQuestion = () => {
-  const category = questions.options[questions.selectedIndex].parentNode.label
-  // This variable stores what option group (category) the question belongs to.
-  // We also need a variable that stores the actual value of the question we've selected.
-
-  if (category === 'hair color') {
-    currentQuestion = {
-      attribute: 'hairColor',
-      // value: ,
-      // 👆 add the value from the input here
-      category: category,
-    }
-  } else if (category === 'eye color') {
-    // Set this up your self
-  } else if (category === 'accessories') {
-    currentQuestion = {
-      //attribute: ,
-      // 👆 this is the property of the booleans such as smoke, glasses and hat. add the value from the input here
-      value: true, // we're asking if this person wears a hat for exaple, so always true in the question.
-      category: category,
-    }
-  } else if (category === 'other') {
-    // Set this up your self (should be same structure as above)
+  } else if (sender === "bot") {
+    chat.innerHTML += `
+      <section class="bot-msg">
+        <img src="assets/aiv-bot_400x400.jpg" alt="Bot" />
+        <div class="bubble bot-bubble">
+          <p>${message}</p>
+        </div>
+      </section>
+    `
   }
+  // This little thing makes the chat scroll to the last message when there are too many to be shown in the chat box
+  chat.scrollTop = chat.scrollHeight
 }
 
-// This function should be invoked when you click on 'Find Out'.
-const checkQuestion = () => {
-  // Compare the currentQuestion with the secret person.
-  // See if we should keep or remove people based on that
-  // Then invoke filterCharacters
+// Starts here
+const greeting = () => {
+  showMessage(`Hej på dig! Vad heter du?`, "bot")
+  // Just to check it out, change "bot" to "user" here 👆
 }
 
-// It'll filter the characters array and redraw the game board.
-const filterCharacters = (keep) => {
-  // Show the correct alert message for different categories
-  if (group === 'accessories') {
-    if (keep) {
-      alert(
-        `Yes, the person wears ${attribute}! Keep all that wears ${attribute}`
-      )
-    } else {
-      alert(
-        `No, the person doesn't wear ${attribute}! Remove all that wears ${attribute}`
-      )
-    }
-  } else if (group === 'other') {
-    // Similar to the one above
-  } else {
-    if (keep) {
-      // alert popup that says something like: "Yes, the person has yellow hair! Keep all persons with yellow hair"
-    } else {
-      // alert popup that says something like: "NO, the person doesnt have yellow hair! Remove all persons with yellow hair"
-    }
-  }
+// Set up your eventlisteners here
 
-  // filter to keep or remove based on the keep variable.
-  /* charactersInPlay = charactersInPlay.filter((person) => person[attribute] === value)
-    or 
-    charactersInPlay = charactersInPlay.filter((person) => person[attribute] !== value) */
+document.getElementById("name-form").addEventListener("submit", handleNameInput)
 
-  // Invoke a function to redraw the board with the remaining people.
-}
-
-// when clicking guess, the player first have to confirm that they want to make a guess.
-const guess = (suspect) => {
-  // store the interaction from the player in a variable.
-  // remember the confirm() ?
-  // If the player wants to guess, invoke the checkMyGuess function.
-}
-
-// If you confirm, this function is invoked
-const checkMyGuess = (suspect) => {
-  // 1. Check if the suspect is the same as the secret person's name
-  // 2. Set a Message to show in the win or lose section accordingly
-  // 3. Show the win or lose section
-  // 4. Hide the game board
-}
-
-// Invokes the start function when website is loaded
-start()
-
-// All the event listeners
-restartButton.addEventListener('click', start)
+// When website loaded, chatbot asks first question.
+// normally we would invoke a function like this:
+// greeting()
+// But if we want to add a little delay to it, we can wrap it in a setTimeout:
+// setTimeout(functionName, timeToWaitInMilliSeconds)
+// This means the greeting function will be called one second after the website is loaded.
+setTimeout(greeting, 1000)
