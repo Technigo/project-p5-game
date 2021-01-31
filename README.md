@@ -1,4 +1,4 @@
-# Who's there game
+# Guess who game
 
 A fun game to play by yourself, based on the classic Who's there game.
 
