@@ -8,3 +8,4 @@ Used a template for the game that missed many key elements for the game to be co
 
 ## View it live
 
+https://thirsty-swartz-1b4956.netlify.app
