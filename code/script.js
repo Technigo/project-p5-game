@@ -344,17 +344,18 @@ const filterCharacters = (keep) => {
     alert(`Yes, the person has ${value} eyes! Keeping all the people with ${value} eyes.`
     )
   } else {
-    alert(
-      `No, the person doesn't have ${value} eyes. Removing people with ${value} eyes.`
+    alert(`No, the person doesn't have ${value} eyes. Removing people with ${value} eyes.`
       )
     }
-  } else {
+  } else if (category === 'other') {
     if (keep) {
-      alert(`Yes, the person is a ${attribute}. Keeping all the people that are ${attribute}s.`)
-    } else {
-      alert(`No, the person is not a ${attribute}. Removing ll the people that are ${attribute}s.`)
+      alert(`Yes, the person is a ${attribute}. Keeping all the people that are ${attribute}s.`
+      )
+  } else {
+      alert(`No, the person is not a ${attribute}. Removing all the people that are ${attribute}s.`)
     } 
   }
+
 
   // filter to keep or remove based on the keep variable.
   if (keep) {
