@@ -305,12 +305,14 @@ const setSecret = () => {
 // Start & initialize the game by
 // bringing in the characters from the array,
 // (re)set the board,
+// (re)set the guess list,
 // invoke the generation of characters,
 // and invoke the selection of secret character
 const start = () => {
   charactersInPlay = CHARACTERS
   board.style.display = 'flex'
   winOrLose.style.display = 'none'
+  questions.selectedIndex = '0'
   generateBoard()
   setSecret()
   // console.log(secret)
@@ -319,33 +321,33 @@ const start = () => {
 // Sets & stores the values from the drop-down,
 // to be used when user guesses
 const selectQuestion = () => {
-  const category = questions.options[questions.selectedIndex].parentNode.label
-  const categoryValue = questions.value
-  // console.log(categoryValue)
-  // console.log(category)
-  if (category === 'hair color') {
+  const guessCategory = questions.options[questions.selectedIndex].parentNode.label
+  const guessValue = questions.value
+  // console.log(guessValue)
+  // console.log(guessCategory)
+  if (guessCategory === 'hair color') {
     currentQuestion = {
       attribute: 'hairColor',
-      value: categoryValue,
-      category: category,
+      value: guessValue,
+      category: guessCategory,
     }
-  } else if (category === 'eye color') {
+  } else if (guessCategory === 'eye color') {
       currentQuestion = {
         attribute: 'eyeColor',
-        value: categoryValue,
-        category: category,
+        value: guessValue,
+        category: guessCategory,
       }
-  } else if (category === 'accessories') {
+  } else if (guessCategory === 'accessories') {
       currentQuestion = {
-        attribute: categoryValue,
+        attribute: guessValue,
         value: true,
-        category: category,
+        category: guessCategory,
     }
-  } else if (category === 'other') {
+  } else if (guessCategory === 'other') {
       currentQuestion = {
-        attribute: categoryValue,
+        attribute: guessValue,
         value: true,
-        category: category,
+        category: guessCategory,
       }
   }
 }
@@ -354,18 +356,18 @@ const selectQuestion = () => {
 // compare the guess to the answer,
 // and pass information along to the filter function
 const checkQuestion = () => {
-  const keep = currentQuestion.value === secret[currentQuestion.attribute]
-  // console.log(keep)
-  filterCharacters(keep)
+  const guess = currentQuestion.value === secret[currentQuestion.attribute]
+  // console.log(guess)
+  filterCharacters(guess)
 }
 
 // When the user made their guess,
 // filter the choices,
 // and redraw the board based on who remains
-const filterCharacters = (keep) => {
+const filterCharacters = (guess) => {
   const { attribute, value, category } = currentQuestion
     if (category === 'accessories') {
-      if (keep) {
+      if (guess) {
         alert(`✔ Yes, the person wears ${attribute}! Good guess.
 🤖 Keeping those who wear ${attribute}.`)
       } else {
@@ -373,7 +375,7 @@ const filterCharacters = (keep) => {
 🤖 Removing those who wear ${attribute}.`)
         }
     } else if (category === 'other') {
-      if (keep) {
+      if (guess) {
         alert(`✔ Yes, ${attribute} is the name of the game! Good guess.
 🤖 Keeping those ones.`)
       } else {
@@ -381,7 +383,7 @@ const filterCharacters = (keep) => {
 🤖 Removing those ones.`)
         }
     } else if (category === 'hair color') {
-      if (keep) {
+      if (guess) {
         alert(`✔ Yes, the person has ${value} hair! Good guess.
 🤖 Keeping every ${value} haired ones.`)
       } else {
@@ -389,7 +391,7 @@ const filterCharacters = (keep) => {
 🤖 Removing those with ${value} hair.`)
         }
     } else if (category === 'eye color') {
-      if (keep) {
+      if (guess) {
         alert(`✔ Yes, gaze into their ${value} eyes! Good guess.
 🤖 Keeping the ${value} eyed ones.`)
       } else {
@@ -397,7 +399,7 @@ const filterCharacters = (keep) => {
 🤖 Removing everyone with ${value} eyes.`)
         }
     }
-  if (keep) {
+  if (guess) {
     charactersInPlay = charactersInPlay.filter((person) => person[attribute] === value)
   }
   else {
@@ -419,10 +421,10 @@ const guess = (suspect) => {
 // and depending on result change the page
 const checkMyGuess = (suspect) => {
   if (suspect === secret.name) {
-    winOrLoseText.innerHTML = `Yep, it was ${suspect}! Congratulations, detective! 🎉`
+    winOrLoseText.innerHTML = `Yep, it was <em>${suspect}</em>! Congratulations, detective! 🎉`
   }
   else {
-    winOrLoseText.innerHTML = `Close, yet so far away. It wasn't <em>${suspect}</em>, it was <em>${secret.name}</em>. Better luck next time. 🎭`
+    winOrLoseText.innerHTML = `Close, yet so far away. It was <em>${secret.name}</em>, not <em>${suspect}</em>. Better luck next time. 🎭`
   }
   winOrLose.style.display = 'flex'
   board.style.display = 'none'
