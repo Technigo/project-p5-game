@@ -442,9 +442,9 @@ playAgain.addEventListener('click', start)
 restartButton.addEventListener('click', start)
 
 // If the user clicks the Find Out button,
-//invoke the checkQuestion function
+// invoke the checkQuestion function
 findOut.addEventListener('click', checkQuestion)
 
 // If the user selects a value from the drop-down,
-//pass its value to the selectQuestion function
+// pass its value to the selectQuestion function
 questions.addEventListener('change', () => selectQuestion())
