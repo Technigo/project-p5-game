@@ -302,7 +302,7 @@ const selectQuestion = () => {
 
 // This function should be invoked when you click on 'Find Out'.
 const checkQuestion = () => {
-const keep = currentQuestion.value === setSecret(currentQuestion.attribute)
+const keep = currentQuestion.value === secret[currentQuestion.attribute]
 filterCharacters(keep)
   // Compare the currentQuestion with the secret person.
   // See if we should keep or remove people based on that
