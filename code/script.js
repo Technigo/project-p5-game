@@ -18,7 +18,7 @@ const CHARACTERS = [
     'a hat': true,
     smoker: false,
     'face hair': false,
-    jewelry: false,
+    jewelry: false
   },
   {
     name: 'Jack',
@@ -40,7 +40,7 @@ const CHARACTERS = [
     'a hat': true,
     smoker: true,
     'face hair': true,
-    jewelry: false,
+    jewelry: false
   },
   {
     name: 'Jai',
@@ -51,7 +51,7 @@ const CHARACTERS = [
     'a hat': false,
     smoker: false,
     'face hair': false,
-    jewelry: false,
+    jewelry: false
   },
   {
     name: 'Jake',
@@ -62,7 +62,7 @@ const CHARACTERS = [
     'a hat': false,
     smoker: false,
     'face hair': false,
-    jewelry: false,
+    jewelry: false
   },
   {
     name: 'James',
@@ -73,7 +73,7 @@ const CHARACTERS = [
     'a hat': false,
     smoker: false,
     'face hair': true,
-    jewelry: false,
+    jewelry: false
   },
   {
     name: 'Jana',
@@ -84,7 +84,7 @@ const CHARACTERS = [
     'a hat': false,
     smoker: false,
     'face hair': false,
-    jewelry: true,
+    jewelry: true
   },
   {
     name: 'Jane',
@@ -95,7 +95,7 @@ const CHARACTERS = [
     'a hat': false,
     smoker: false,
     'face hair': false,
-    jewelry: false,
+    jewelry: false
   },
   {
     name: 'Jaqueline',
@@ -106,7 +106,7 @@ const CHARACTERS = [
     'a hat': false,
     smoker: false,
     'face hair': false,
-    jewelry: true,
+    jewelry: true
   },
 
   {
@@ -118,7 +118,7 @@ const CHARACTERS = [
     'a hat': false,
     smoker: true,
     'face hair': false,
-    jewelry: false,
+    jewelry: false
   },
   {
     name: 'Jean',
@@ -129,7 +129,7 @@ const CHARACTERS = [
     'a hat': true,
     smoker: true,
     'face hair': true,
-    jewelry: false,
+    jewelry: false
   },
   {
     name: 'Jeane',
@@ -140,7 +140,7 @@ const CHARACTERS = [
     'a hat': false,
     smoker: false,
     'face hair': false,
-    jewelry: false,
+    jewelry: false
   },
   {
     name: 'Jed',
@@ -151,7 +151,7 @@ const CHARACTERS = [
     'a hat': true,
     smoker: true,
     'face hair': true,
-    jewelry: false,
+    jewelry: false
   },
   {
     name: 'Jenni',
@@ -162,7 +162,7 @@ const CHARACTERS = [
     'a hat': true,
     smoker: false,
     'face hair': false,
-    jewelry: false,
+    jewelry: false
   },
   {
     name: 'Jeri',
@@ -173,7 +173,7 @@ const CHARACTERS = [
     'a hat': false,
     smoker: false,
     'face hair': false,
-    jewelry: false,
+    jewelry: false
   },
   {
     name: 'Jerry',
@@ -184,7 +184,7 @@ const CHARACTERS = [
     'a hat': true,
     smoker: false,
     'face hair': false,
-    jewelry: false,
+    jewelry: false
   },
   {
     name: 'Jess',
@@ -195,7 +195,7 @@ const CHARACTERS = [
     'a hat': false,
     smoker: false,
     'face hair': false,
-    jewelry: false,
+    jewelry: false
   },
   {
     name: 'Jocelyn',
@@ -206,7 +206,7 @@ const CHARACTERS = [
     'a hat': false,
     smoker: false,
     'face hair': false,
-    jewelry: true,
+    jewelry: true
   },
   {
     name: 'Jon',
@@ -217,7 +217,7 @@ const CHARACTERS = [
     'a hat': false,
     smoker: false,
     'face hair': false,
-    jewelry: false,
+    jewelry: false
   },
   {
     name: 'Jordan',
@@ -228,7 +228,7 @@ const CHARACTERS = [
     'a hat': true,
     smoker: false,
     'face hair': false,
-    jewelry: true,
+    jewelry: true
   },
   {
     name: 'Josephine',
@@ -239,7 +239,7 @@ const CHARACTERS = [
     'a hat': false,
     smoker: false,
     'face hair': false,
-    jewelry: true,
+    jewelry: true
   },
   {
     name: 'Josh',
@@ -250,7 +250,7 @@ const CHARACTERS = [
     'a hat': false,
     smoker: false,
     'face hair': false,
-    jewelry: false,
+    jewelry: false
   },
   {
     name: 'Jude',
@@ -261,7 +261,7 @@ const CHARACTERS = [
     'a hat': false,
     smoker: false,
     'face hair': true,
-    jewelry: false,
+    jewelry: false
   },
   {
     name: 'Julie',
@@ -272,7 +272,7 @@ const CHARACTERS = [
     'a hat': true,
     smoker: false,
     'face hair': false,
-    jewelry: false,
+    jewelry: false
   },
 ]
 
@@ -289,7 +289,7 @@ const generateBoard = () => {
         <img src=${person.img} alt=${person.name}>
         <div class="guess">
           <span>Guess on ${person.name}?</span>
-          <button class="filled-button small" onclick="guess('${person.name}')">Guess</button>
+          <button class="filled-button small" onclick="confirmGuess('${person.name}')">Guess</button>
         </div>
       </div>
     `
@@ -315,7 +315,6 @@ const start = () => {
   questions.selectedIndex = '0'
   generateBoard()
   setSecret()
-  // console.log(secret)
 }
 
 // Sets & stores the values from the drop-down,
@@ -323,8 +322,6 @@ const start = () => {
 const selectQuestion = () => {
   const guessCategory = questions.options[questions.selectedIndex].parentNode.label
   const guessValue = questions.value
-  // console.log(guessValue)
-  // console.log(guessCategory)
   if (guessCategory === 'hair color') {
     currentQuestion = {
       attribute: 'hairColor',
@@ -356,18 +353,17 @@ const selectQuestion = () => {
 // compare the guess to the answer,
 // and pass information along to the filter function
 const checkQuestion = () => {
-  const guess = currentQuestion.value === secret[currentQuestion.attribute]
-  // console.log(guess)
-  filterCharacters(guess)
+  const isGuessCorrect = currentQuestion.value === secret[currentQuestion.attribute]
+  filterCharacters(isGuessCorrect)
 }
 
 // When the user made their guess,
 // filter the choices,
 // and redraw the board based on who remains
-const filterCharacters = (guess) => {
+const filterCharacters = (isGuessCorrect) => {
   const { attribute, value, category } = currentQuestion
     if (category === 'accessories') {
-      if (guess) {
+      if (isGuessCorrect) {
         alert(`✔ Yes, the person wears ${attribute}! Good guess.
 🤖 Keeping those who wear ${attribute}.`)
       } else {
@@ -375,7 +371,7 @@ const filterCharacters = (guess) => {
 🤖 Removing those who wear ${attribute}.`)
         }
     } else if (category === 'other') {
-      if (guess) {
+      if (isGuessCorrect) {
         alert(`✔ Yes, ${attribute} is the name of the game! Good guess.
 🤖 Keeping those ones.`)
       } else {
@@ -383,7 +379,7 @@ const filterCharacters = (guess) => {
 🤖 Removing those ones.`)
         }
     } else if (category === 'hair color') {
-      if (guess) {
+      if (isGuessCorrect) {
         alert(`✔ Yes, the person has ${value} hair! Good guess.
 🤖 Keeping every ${value} haired ones.`)
       } else {
@@ -391,7 +387,7 @@ const filterCharacters = (guess) => {
 🤖 Removing those with ${value} hair.`)
         }
     } else if (category === 'eye color') {
-      if (guess) {
+      if (isGuessCorrect) {
         alert(`✔ Yes, gaze into their ${value} eyes! Good guess.
 🤖 Keeping the ${value} eyed ones.`)
       } else {
@@ -399,7 +395,7 @@ const filterCharacters = (guess) => {
 🤖 Removing everyone with ${value} eyes.`)
         }
     }
-  if (guess) {
+  if (isGuessCorrect) {
     charactersInPlay = charactersInPlay.filter((person) => person[attribute] === value)
   }
   else {
@@ -409,9 +405,9 @@ const filterCharacters = (guess) => {
 }
 
 // Confirm with the user if they meant to guess
-const guess = (suspect) => {
-  confirm(`🙈 You're about to guess on ${suspect}. Are you sure?`)
-  if (confirm) {
+const confirmGuess = (suspect) => {
+  let cont = confirm(`🙈 You're about to guess on ${suspect}. Are you sure?`)
+  if (cont === true) {
     checkMyGuess(suspect)
   }
 }
@@ -447,4 +443,4 @@ findOut.addEventListener('click', checkQuestion)
 
 // If the user selects a value from the drop-down,
 // pass its value to the selectQuestion function
-questions.addEventListener('change', () => selectQuestion())
+questions.addEventListener('change', selectQuestion)
