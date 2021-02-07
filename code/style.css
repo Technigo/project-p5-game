@@ -1,7 +1,7 @@
 /* Global css variables used for colors */
 :root {
-  --primary: #a259ff;
-  --secondary: #b0a6ff;
+  --primary: #e7ffe5;
+  --secondary: #3f7a5d;
 }
 
 body {
@@ -9,6 +9,7 @@ body {
   margin: 0;
   padding: 0;
   font-family: 'Montserrat', sans-serif;
+  background: var(--primary);
 }
 
 h1 {
@@ -71,6 +72,7 @@ select {
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
+  transition: 0.3s;
 }
 
 .card p {
@@ -78,6 +80,7 @@ select {
   margin-bottom: 0;
   font-size: 16px;
   font-weight: 700;
+  transition: 0.3s;
 }
 
 .card .guess {
@@ -85,23 +88,27 @@ select {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  color: white;
+  color: var(--primary);
   text-align: center;
   height: inherit;
+  transition: 0.3s;
 }
 
 .card:hover {
   background-color: var(--secondary);
+  transition: 0.3s;
 }
 
 .card:hover img,
 .card:hover p {
   display: none;
+  transition: 0.3s;
 }
 
 /* The div with the guess class is only shown on hover */
 .card:hover .guess {
   display: flex;
+  transition: 0.3s;
 }
 
 .guess span {
@@ -110,6 +117,7 @@ select {
   font-weight: 600;
   margin-bottom: 8px;
   width: 90%;
+  transition: 0.3s;
 }
 
 /****** BUTTONS ******/
@@ -121,6 +129,8 @@ button {
   font-weight: bold;
   padding: 17px 27px;
   cursor: pointer;
+  transition: 0.3s;
+
 }
 
 .small {
@@ -136,12 +146,12 @@ button {
 .filled-button,
 .outlined-button:hover {
   background-color: var(--primary);
-  color: white;
+  color: #3f7a5d;
 }
 
 .filled-button:hover {
-  background-color: white;
-  border-color: white;
+  background-color: var(--secondary);
+  border-color: var(-primary);
   color: var(--primary);
 }
 
@@ -226,7 +236,7 @@ button {
   .card .guess .filled-button {
     padding: 6px 11px;
     margin-bottom: 1px;
-    background: white;
+    background: var(--primary);
     color: var(--primary);
     border: none;
   }
